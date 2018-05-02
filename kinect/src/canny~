@@ -1,0 +1,12 @@
+#include <iostream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+
+using namespace std;
+
+
+
+int main(){
+	cv::Mat image=cv::imread("../rgb_picture_7.tiff");
+	
