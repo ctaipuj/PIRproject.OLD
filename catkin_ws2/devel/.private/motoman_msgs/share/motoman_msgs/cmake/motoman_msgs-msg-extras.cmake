@@ -1,0 +1,2 @@
+set(motoman_msgs_MESSAGE_FILES "/home/ctai/catkin_ws2/src/motoman/motoman_msgs/msg/DynamicJointsGroup.msg;/home/ctai/catkin_ws2/src/motoman/motoman_msgs/msg/DynamicJointPoint.msg;/home/ctai/catkin_ws2/src/motoman/motoman_msgs/msg/DynamicJointTrajectory.msg;/home/ctai/catkin_ws2/src/motoman/motoman_msgs/msg/DynamicJointState.msg;/home/ctai/catkin_ws2/src/motoman/motoman_msgs/msg/DynamicJointTrajectoryFeedback.msg")
+set(motoman_msgs_SERVICE_FILES "/home/ctai/catkin_ws2/src/motoman/motoman_msgs/srv/CmdJointTrajectoryEx.srv")

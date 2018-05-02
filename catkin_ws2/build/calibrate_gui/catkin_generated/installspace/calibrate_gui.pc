@@ -1,0 +1,8 @@
+prefix=/home/ctai/catkin_ws2/install
+
+Name: calibrate_gui
+Description: Description of calibrate_gui
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/ctai/catkin_ws2/install/lib 
+Requires: 

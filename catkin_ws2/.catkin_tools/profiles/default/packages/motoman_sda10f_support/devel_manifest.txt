@@ -1,0 +1,4 @@
+motoman/motoman_sda10f_support
+/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_support/lib/pkgconfig/motoman_sda10f_support.pc /home/ctai/catkin_ws2/devel/lib/pkgconfig/motoman_sda10f_support.pc
+/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_support/share/motoman_sda10f_support/cmake/motoman_sda10f_supportConfig-version.cmake /home/ctai/catkin_ws2/devel/share/motoman_sda10f_support/cmake/motoman_sda10f_supportConfig-version.cmake
+/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_support/share/motoman_sda10f_support/cmake/motoman_sda10f_supportConfig.cmake /home/ctai/catkin_ws2/devel/share/motoman_sda10f_support/cmake/motoman_sda10f_supportConfig.cmake

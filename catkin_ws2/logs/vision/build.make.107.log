@@ -1,0 +1,23 @@
+[  0%] [  0%] Built target geometry_msgs_generate_messages_lisp
+Built target geometry_msgs_generate_messages_eus
+[  7%] Built target kinect_to_robot_tf
+[ 15%] Built target fake_k_roll
+[ 15%] [35m[1mScanning dependencies of target image_converter
+[ 15%] [ 15%] Built target std_msgs_generate_messages_lisp
+Built target std_msgs_generate_messages_eus
+Built target std_msgs_generate_messages_nodejs
+[ 15%] Built target geometry_msgs_generate_messages_nodejs
+[ 15%] Built target std_msgs_generate_messages_py
+[ 15%] Built target geometry_msgs_generate_messages_py
+[ 15%] [ 15%] Built target std_msgs_generate_messages_cpp
+Built target geometry_msgs_generate_messages_cpp
+[ 15%] Built target _vision_generate_messages_check_deps_bottle_data
+[ 23%] [ 38%] [ 38%] Built target vision_generate_messages_nodejs
+[ 53%] Built target vision_generate_messages_lisp
+Built target vision_generate_messages_cpp
+Built target vision_generate_messages_py
+[ 69%] Built target vision_generate_messages_eus
+[ 69%] Built target vision_generate_messages
+[0m[ 76%] [32mBuilding CXX object CMakeFiles/image_converter.dir/src/bridge.cpp.o
+[0m[31m[1mLinking CXX executable /home/ctai/catkin_ws2/devel/.private/vision/lib/vision/image_converter
+[0m[100%] Built target image_converter

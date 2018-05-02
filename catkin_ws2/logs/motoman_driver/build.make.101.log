@@ -1,0 +1,70 @@
+[  0%] [  0%] [  0%] [  0%] Built target actionlib_generate_messages_eus
+Built target trajectory_msgs_generate_messages_eus
+Built target industrial_msgs_generate_messages_eus
+Built target motoman_msgs_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] [  0%] [  0%] [  0%] [  0%] Built target control_msgs_generate_messages_nodejs
+Built target control_msgs_generate_messages_lisp
+Built target rosgraph_msgs_generate_messages_nodejs
+Built target trajectory_msgs_generate_messages_cpp
+Built target geometry_msgs_generate_messages_nodejs
+[  0%] [  0%] Built target actionlib_msgs_generate_messages_eus
+[  0%] Built target motoman_msgs_generate_messages_nodejs
+Built target std_msgs_generate_messages_cpp
+[  0%] [  0%] Built target industrial_msgs_generate_messages_py
+Built target roscpp_generate_messages_py
+[  0%] [  0%] Built target actionlib_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target trajectory_msgs_generate_messages_py
+Built target std_srvs_generate_messages_lisp
+[  0%] Built target actionlib_generate_messages_lisp
+[  0%] [  0%] Built target sensor_msgs_generate_messages_lisp
+[  0%] Built target sensor_msgs_generate_messages_nodejs
+Built target sensor_msgs_generate_messages_py
+[  0%] [  0%] Built target std_srvs_generate_messages_py
+Built target actionlib_generate_messages_py
+[  0%] [  0%] [  0%] Built target industrial_msgs_generate_messages_nodejs
+Built target trajectory_msgs_generate_messages_nodejs
+Built target control_msgs_generate_messages_cpp
+[  0%] [  0%] Built target actionlib_generate_messages_nodejs
+Built target actionlib_msgs_generate_messages_cpp
+[  0%] [  0%] Built target actionlib_msgs_generate_messages_lisp
+Built target actionlib_msgs_generate_messages_py
+[  0%] Built target actionlib_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] [  0%] [  0%] Built target std_msgs_generate_messages_lisp
+Built target roscpp_generate_messages_nodejs
+Built target roscpp_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] [  0%] [  0%] Built target std_msgs_generate_messages_py
+Built target _catkin_empty_exported_target
+Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] [  0%] Built target control_msgs_generate_messages_py
+Built target trajectory_msgs_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target std_srvs_generate_messages_cpp
+[  0%] [  0%] Built target geometry_msgs_generate_messages_eus
+Built target control_msgs_generate_messages_eus
+[  0%] [  0%] Built target industrial_msgs_generate_messages_lisp
+Built target industrial_msgs_generate_messages_cpp
+[  0%] Built target sensor_msgs_generate_messages_cpp
+[  0%] [  0%] Built target motoman_msgs_generate_messages_lisp
+Built target sensor_msgs_generate_messages_eus
+[  0%] Built target motoman_msgs_generate_messages_cpp
+[  0%] Built target motoman_msgs_generate_messages_eus
+[  0%] Built target std_srvs_generate_messages_eus
+[  0%] Built target std_srvs_generate_messages_nodejs
+[ 21%] Built target motoman_simple_message
+[ 42%] Built target motoman_simple_message_bswap
+[ 62%] Built target motoman_industrial_robot_client_bswap
+[ 82%] Built target motoman_industrial_robot_client
+[ 83%] Built target motoman_robot_state_bswap
+[ 89%] [ 94%] Built target motoman_motion_streaming_interface_bswap
+Built target motoman_motion_streaming_interface
+[ 98%] Built target motoman_driver_joint_trajectory_action
+[100%] Built target motoman_robot_state

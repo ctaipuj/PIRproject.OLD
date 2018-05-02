@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/vision/lib/python2.7/dist-packages/vision/msg/_bottle_data.py

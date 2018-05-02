@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ctai/catkin_ws2/devel/.private/industrial_extrinsic_cal/setup.sh

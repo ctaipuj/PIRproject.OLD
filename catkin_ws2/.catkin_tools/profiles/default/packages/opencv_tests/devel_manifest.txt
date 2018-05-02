@@ -1,0 +1,4 @@
+vision_opencv/opencv_tests
+/home/ctai/catkin_ws2/devel/.private/opencv_tests/lib/pkgconfig/opencv_tests.pc /home/ctai/catkin_ws2/devel/lib/pkgconfig/opencv_tests.pc
+/home/ctai/catkin_ws2/devel/.private/opencv_tests/share/opencv_tests/cmake/opencv_testsConfig.cmake /home/ctai/catkin_ws2/devel/share/opencv_tests/cmake/opencv_testsConfig.cmake
+/home/ctai/catkin_ws2/devel/.private/opencv_tests/share/opencv_tests/cmake/opencv_testsConfig-version.cmake /home/ctai/catkin_ws2/devel/share/opencv_tests/cmake/opencv_testsConfig-version.cmake

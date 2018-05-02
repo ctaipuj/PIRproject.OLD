@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/robo_cylinder/share/roseus/ros/robo_cylinder/manifest.l

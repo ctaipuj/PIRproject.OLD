@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ctai/catkin_ws2/devel/.private/target_finder/setup.sh

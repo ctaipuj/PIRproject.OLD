@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/intrinsic_cal/share/gennodejs/ros/intrinsic_cal/srv/_index.js

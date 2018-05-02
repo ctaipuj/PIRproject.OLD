@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/industrial_extrinsic_cal/share/roseus/ros/industrial_extrinsic_cal/msg/robot_pose_triggerActionResult.l

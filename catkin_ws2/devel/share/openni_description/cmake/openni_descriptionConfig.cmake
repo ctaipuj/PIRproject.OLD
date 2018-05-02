@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/openni_description/share/openni_description/cmake/openni_descriptionConfig.cmake

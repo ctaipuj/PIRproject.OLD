@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/moveit_config/share/moveit_config/cmake/moveit_configConfig.cmake

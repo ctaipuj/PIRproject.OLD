@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/industrial_extrinsic_cal/share/industrial_extrinsic_cal/cmake/industrial_extrinsic_calConfig.cmake

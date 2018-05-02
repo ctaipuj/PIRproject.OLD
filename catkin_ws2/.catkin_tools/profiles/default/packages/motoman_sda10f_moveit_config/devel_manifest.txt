@@ -1,0 +1,4 @@
+motoman/motoman_sda10f_moveit_config
+/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_moveit_config/lib/pkgconfig/motoman_sda10f_moveit_config.pc /home/ctai/catkin_ws2/devel/lib/pkgconfig/motoman_sda10f_moveit_config.pc
+/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_moveit_config/share/motoman_sda10f_moveit_config/cmake/motoman_sda10f_moveit_configConfig.cmake /home/ctai/catkin_ws2/devel/share/motoman_sda10f_moveit_config/cmake/motoman_sda10f_moveit_configConfig.cmake
+/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_moveit_config/share/motoman_sda10f_moveit_config/cmake/motoman_sda10f_moveit_configConfig-version.cmake /home/ctai/catkin_ws2/devel/share/motoman_sda10f_moveit_config/cmake/motoman_sda10f_moveit_configConfig-version.cmake

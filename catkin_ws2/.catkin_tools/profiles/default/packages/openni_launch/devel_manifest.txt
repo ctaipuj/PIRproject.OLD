@@ -1,0 +1,4 @@
+openni_camera/openni_launch
+/home/ctai/catkin_ws2/devel/.private/openni_launch/lib/pkgconfig/openni_launch.pc /home/ctai/catkin_ws2/devel/lib/pkgconfig/openni_launch.pc
+/home/ctai/catkin_ws2/devel/.private/openni_launch/share/openni_launch/cmake/openni_launchConfig-version.cmake /home/ctai/catkin_ws2/devel/share/openni_launch/cmake/openni_launchConfig-version.cmake
+/home/ctai/catkin_ws2/devel/.private/openni_launch/share/openni_launch/cmake/openni_launchConfig.cmake /home/ctai/catkin_ws2/devel/share/openni_launch/cmake/openni_launchConfig.cmake

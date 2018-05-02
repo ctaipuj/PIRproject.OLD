@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/openni_camera/include/openni_camera/OpenNIConfig.h

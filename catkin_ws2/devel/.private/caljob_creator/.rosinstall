@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ctai/catkin_ws2/devel/.private/caljob_creator/setup.sh

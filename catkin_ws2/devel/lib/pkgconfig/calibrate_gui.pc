@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/calibrate_gui/lib/pkgconfig/calibrate_gui.pc

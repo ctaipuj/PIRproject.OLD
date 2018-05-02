@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ctai/catkin_ws2/src/industrial_calibration/industrial_extrinsic_cal/src/nodes/mono_ex_cal.cpp
+stdio.h
+-
+vector
+-
+ceres/ceres.h
+/home/ctai/catkin_ws2/src/industrial_calibration/industrial_extrinsic_cal/src/nodes/ceres/ceres.h
+ceres/rotation.h
+/home/ctai/catkin_ws2/src/industrial_calibration/industrial_extrinsic_cal/src/nodes/ceres/rotation.h
+iostream
+-
+

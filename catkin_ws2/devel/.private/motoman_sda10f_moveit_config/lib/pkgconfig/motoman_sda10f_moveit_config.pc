@@ -1,0 +1,8 @@
+prefix=/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_moveit_config
+
+Name: motoman_sda10f_moveit_config
+Description: Description of motoman_sda10f_moveit_config
+Version: 0.3.0
+Cflags: 
+Libs: -L/home/ctai/catkin_ws2/devel/.private/motoman_sda10f_moveit_config/lib 
+Requires: 

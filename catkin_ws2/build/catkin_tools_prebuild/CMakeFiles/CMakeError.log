@@ -1,0 +1,57 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTryCompileExec667699230/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec667699230.dir/build.make CMakeFiles/cmTryCompileExec667699230.dir/build
+make[1]: Entering directory '/home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp'
+/usr/local/bin/cmake -E cmake_progress_report /home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec667699230.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec667699230.dir/CheckSymbolExists.c.o   -c /home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec667699230
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec667699230.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec667699230.dir/CheckSymbolExists.c.o  -o cmTryCompileExec667699230 -rdynamic 
+CMakeFiles/cmTryCompileExec667699230.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTryCompileExec667699230.dir/build.make:88: recipe for target 'cmTryCompileExec667699230' failed
+make[1]: *** [cmTryCompileExec667699230] Error 1
+make[1]: Leaving directory '/home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp'
+Makefile:117: recipe for target 'cmTryCompileExec667699230/fast' failed
+make: *** [cmTryCompileExec667699230/fast] Error 2
+
+File /home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTryCompileExec2053272818/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2053272818.dir/build.make CMakeFiles/cmTryCompileExec2053272818.dir/build
+make[1]: Entering directory '/home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp'
+/usr/local/bin/cmake -E cmake_progress_report /home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2053272818.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec2053272818.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.2/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2053272818
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2053272818.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec2053272818.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2053272818 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTryCompileExec2053272818.dir/build.make:88: recipe for target 'cmTryCompileExec2053272818' failed
+make[1]: *** [cmTryCompileExec2053272818] Error 1
+make[1]: Leaving directory '/home/ctai/catkin_ws2/build/catkin_tools_prebuild/CMakeFiles/CMakeTmp'
+Makefile:117: recipe for target 'cmTryCompileExec2053272818/fast' failed
+make: *** [cmTryCompileExec2053272818/fast] Error 2
+
+

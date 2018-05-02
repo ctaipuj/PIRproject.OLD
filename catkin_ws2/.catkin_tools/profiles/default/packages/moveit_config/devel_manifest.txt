@@ -1,0 +1,4 @@
+industrial_calibration_tutorials/rosi_training/work/moveit_config
+/home/ctai/catkin_ws2/devel/.private/moveit_config/lib/pkgconfig/moveit_config.pc /home/ctai/catkin_ws2/devel/lib/pkgconfig/moveit_config.pc
+/home/ctai/catkin_ws2/devel/.private/moveit_config/share/moveit_config/cmake/moveit_configConfig-version.cmake /home/ctai/catkin_ws2/devel/share/moveit_config/cmake/moveit_configConfig-version.cmake
+/home/ctai/catkin_ws2/devel/.private/moveit_config/share/moveit_config/cmake/moveit_configConfig.cmake /home/ctai/catkin_ws2/devel/share/moveit_config/cmake/moveit_configConfig.cmake

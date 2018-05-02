@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/rgbd_depth_correction/lib/pkgconfig/rgbd_depth_correction.pc

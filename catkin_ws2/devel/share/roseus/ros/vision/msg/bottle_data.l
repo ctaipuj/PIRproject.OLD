@@ -1,0 +1,1 @@
+/home/ctai/catkin_ws2/devel/.private/vision/share/roseus/ros/vision/msg/bottle_data.l

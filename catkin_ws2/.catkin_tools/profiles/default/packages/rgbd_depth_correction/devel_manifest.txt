@@ -1,0 +1,6 @@
+industrial_calibration/rgbd_depth_correction
+/home/ctai/catkin_ws2/devel/.private/rgbd_depth_correction/lib/librgbd_depth_correction.so /home/ctai/catkin_ws2/devel/lib/librgbd_depth_correction.so
+/home/ctai/catkin_ws2/devel/.private/rgbd_depth_correction/lib/pkgconfig/rgbd_depth_correction.pc /home/ctai/catkin_ws2/devel/lib/pkgconfig/rgbd_depth_correction.pc
+/home/ctai/catkin_ws2/devel/.private/rgbd_depth_correction/lib/rgbd_depth_correction/depth_calibration /home/ctai/catkin_ws2/devel/lib/rgbd_depth_correction/depth_calibration
+/home/ctai/catkin_ws2/devel/.private/rgbd_depth_correction/share/rgbd_depth_correction/cmake/rgbd_depth_correctionConfig-version.cmake /home/ctai/catkin_ws2/devel/share/rgbd_depth_correction/cmake/rgbd_depth_correctionConfig-version.cmake
+/home/ctai/catkin_ws2/devel/.private/rgbd_depth_correction/share/rgbd_depth_correction/cmake/rgbd_depth_correctionConfig.cmake /home/ctai/catkin_ws2/devel/share/rgbd_depth_correction/cmake/rgbd_depth_correctionConfig.cmake
