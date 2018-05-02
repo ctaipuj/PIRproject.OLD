@@ -1,0 +1,269 @@
+
+using namespace std;
+
+cv::Mat detect::getwhite(cv::Mat hsv,int s,int v){
+
+	cv::Mat blancos=cv::Mat::zeros(cv::Size(image.size()),CV_8U);
+	cv::MatIterator_<cv::Vec3b> it=hsv.begin<cv::Vec3b> ();
+	cv::MatIterator_<cv::Vec3b> itend=hsv.end<cv::Vec3b> ();
+	cv::MatIterator_<uchar> itb=blancos.begin<uchar> ();
+    
+	while(it!=itend){
+		if((*it)[1]<s && (*it)[2]>v){
+			*itb=255;
+			++it;
+			++itb;
+		}
+		else{
+			++it;
+			++itb;
+		}
+	}
+	return blancos;
+}
+
+cv::Mat detect::getred(cv::Mat h,int r1,int r2){
+
+	cv::Mat maskred;
+	cv::Mat lut(1,256,CV_8U); //rojo
+
+	for (int i=0;i<256;i++){
+		if(i<r1 || i>r2){
+			lut.at<uchar>(i)=255;
+		}else{
+			lut.at<uchar>(i)=0;
+		}
+	}
+	
+	cv::LUT(h,lut,maskred);
+	return maskred;
+}
+
+cv::Mat detect::getblue(cv::Mat h,int a1,int a2){
+
+	cv::Mat maskblue;
+	cv::Mat lut(1,256,CV_8U); //azules
+	for (int i=0;i<256;i++){
+		if(i>a1 && i<a2){
+			lut.at<uchar>(i)=255;
+		}else{
+			lut.at<uchar>(i)=0;
+		}
+	}
+	
+	cv::LUT(h,lut,maskblue);
+	return maskblue;
+}
+
+cv::Mat detect::getgreen(cv::Mat h,int g1,int g2){
+	
+	cv::Mat maskgreen;
+	cv::Mat lut(1,256,CV_8U); //Verde
+	for (int i=0;i<256;i++){
+		if(i>g1 && i<g2){
+			lut.at<uchar>(i)=255;
+		}else{
+			lut.at<uchar>(i)=0;
+		}
+	}
+	
+	cv::LUT(h,lut,maskgreen);
+	return maskgreen;
+}
+
+cv::Mat detect::getsaturation(cv::Mat s,int s1,int s2){
+
+	cv::Mat masksaturation;
+	cv::Mat lut(1,256,CV_8U); //saturation
+	
+	for (int i=0;i<256;i++){
+		if(i>15&&i<s1 || i>s2){//90){//140
+			lut.at<uchar>(i)=255;
+		}else{
+			lut.at<uchar>(i)=0;
+		}
+	}
+	
+	cv::LUT(s,lut,masksaturation);
+	return masksaturation;
+}
+
+cv::Mat detect::getvalue(cv::Mat v,int v1,int v2){
+
+	cv::Mat maskvalue;
+	cv::Mat lut(1,256,CV_8U); //Value
+	
+	for (int i=0;i<256;i++){
+		if(i>90&&i<144){//144){//235){//90){//140
+			lut.at<uchar>(i)=255;
+		}else{
+			lut.at<uchar>(i)=0;
+		}
+	}
+	
+	cv::LUT(v,lut,maskvalue);
+	return maskvalue;
+}
+
+cv::Mat detect::findcolors(cv::Mat maskwhite,cv::Mat maskred,cv::Mat maskgreen,cv::Mat maskblue,cv::Mat maskvalue){
+
+	cv::Mat blancos;
+	cv::Mat policolor;
+	cv::Mat bottles;
+	cv::Mat colors;
+	cv::Mat colored_bottles;
+	
+	cv::dilate(maskwhite,maskwhite,cv::Mat(),cv::Point(-1,-1),6);
+	cv::dilate(maskgreen,maskgreen,cv::Mat(),cv::Point(-1,-1),4);
+	
+	cv::bitwise_not(maskwhite,blancos); //no blancos
+	cv::bitwise_not(maskgreen,maskgreen); // NO verde
+	cv::bitwise_or(maskgreen,maskwhite,policolor); //Ni verdes ni blancos
+
+	cv::bitwise_or(maskred,maskblue,bottles); //rojas o azules son botellas
+	
+	cv::bitwise_and(maskvalue,bottles,colors); // Con valor y rojas y azules son botellas de color
+	cv::bitwise_and(colors,policolor,colored_bottles); //Botellas y no blancas ni verdes
+	//cv::bitwise_and(temp,maskgreen,fusion); //botellas no blancas y no verdes
+	
+	return colored_bottles;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cv::morphologyEx(fusion,edges,cv::MORPH_GRADIENT,cv::Mat()); //usar operacion gradiente para hallar bordes*/
+	 
+    vector<vector<cv::Point> > contornos;//Vector de vectores donde se almacenan los contornos  
+    
+    cv::findContours(edges,contornos,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE); //encontrar contornos, solo externos, sin jerarquias
+    
+    vector<cv::Rect> rectangulos(contornos.size()); //Vector de rectangulos
+    vector<vector<cv::Point> >::iterator itc= contornos.begin();//Iterador para los n contornos hallados
+    vector<double> areas(contornos.size());
+    
+    for (int i=0;i<areas.size();i++){
+    
+    		areas[i]=cv::contourArea(contornos[i]);
+    	}
+    
+    int cmin= 86;  //contorno minimo  
+	int cmax=1000; // 360; // 1000 contorno maximo
+	
+	while (itc!=contornos.end()) { //mientras hayan contornos
+		
+		if (itc->size() < cmin || itc->size() > cmax)//eliminar los menores o los mayores
+			itc= contornos.erase(itc); //Eliminar contornos que no se ajusten a las medidas correspondientes
+		else 
+			++itc;//si se ajuste evalue el siguiente
+	}
+
+    for(int i=0;i<contornos.size();i++){ //for que dibuja rectangulos
+   		rectangulos[i]=cv::boundingRect(contornos[i]); //alamcenar en la posicion i del rectangulo el rectangulo mas pequeño que encierre el contorno
+   		cout<<rectangulos[i]<<"\n"; //Imprima los rectangulos solo para probar
+   		cv::rectangle(image,rectangulos[i],cv::Scalar(37,94,247),1); //dibuje rectangulos en la imagen original de color naranja
+   		
+    }
+	
+	itc=contornos.begin();//resetear el contador de nuevo al inicio
+	
+	//CAMBIAR ESTE WHILE POR UN FOR QUE SUME EN i
+    while(itc!=contornos.end()){ //mientras no llegue al final del vector de los contornos
+    
+    		cv::Moments mom=cv::moments(cv::Mat(*itc++)); //calcule todos los momentos del contorno
+    		cv::circle(image,cv::Point(mom.m10/mom.m00,mom.m01/mom.m00),2,cv::Scalar(255,0,255),4); //dibuje un circulo en el centro de masa x=m10/m00 y y=m01/m00
+    		cout<<cv::Point(mom.m10/mom.m00,mom.m01/mom.m00)<<"\n"; // Imprima los centros de masa solo para probar
+   }
+    cv::imshow("edges",edges); // borde hallados con el gradiente
+    cv::imshow("f",fusion); // fusion de los canales segmentados
+    cv::imshow("Segmentada",image); // rectangulos sobre la imagen original
+    
+       
+    cv::waitKey(0);
+    return 0;    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

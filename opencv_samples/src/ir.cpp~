@@ -1,0 +1,282 @@
+#include <opencv2/videoio/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core/core.hpp>
+#include <openni2/OpenNI.h>
+
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+/*static void help()
+{
+        cout << "\nThis program demonstrates usage of depth sensors (Kinect, XtionPRO,...).\n"
+                        "The user gets some of the supported output images.\n"
+            "\nAll supported output map types:\n"
+            "1.) Data given from depth generator\n"
+            "   CAP_OPENNI_DEPTH_MAP            - depth values in mm (CV_16UC1)\n"
+            "   CAP_OPENNI_POINT_CLOUD_MAP      - XYZ in meters (CV_32FC3)\n"
+            "   CAP_OPENNI_DISPARITY_MAP        - disparity in pixels (CV_8UC1)\n"
+            "   CAP_OPENNI_DISPARITY_MAP_32F    - disparity in pixels (CV_32FC1)\n"
+            "   CAP_OPENNI_VALID_DEPTH_MASK     - mask of valid pixels (not ocluded, not shaded etc.) (CV_8UC1)\n"
+            "2.) Data given from RGB image generator\n"
+            "   CAP_OPENNI_BGR_IMAGE            - color image (CV_8UC3)\n"
+            "   CAP_OPENNI_GRAY_IMAGE           - gray image (CV_8UC1)\n"
+            "2.) Data given from IR image generator\n"
+            "   CAP_OPENNI_IR_IMAGE             - gray image (CV_16UC1)\n"
+         << endl;
+}
+
+
+/*
+ * To work with Kinect or XtionPRO the user must install OpenNI library and PrimeSensorModule for OpenNI and
+ * configure OpenCV with WITH_OPENNI flag is ON (using CMake).
+ */
+int main()
+{
+    bool isColorizeDisp, isFixedMaxDisp;
+    int imageMode;
+    bool retrievedImageFlags[6];
+    string filename;
+    bool isVideoReading;
+
+    cout << "Device opening ..." << endl;
+    VideoCapture capture;
+    if( isVideoReading )
+        capture.open( filename );
+    else
+    {
+        capture.open( CAP_OPENNI2 );
+        if( !capture.isOpened() )
+            capture.open( CAP_OPENNI );
+    }
+
+    cout << "done." << endl;
+
+    if( !capture.isOpened() )
+    {
+        cout << "Can not open a capture object." << endl;
+        return -1;
+    }
+
+    //capture.set(CAP_OPENNI_IR_GENERATOR_PRESENT, true);
+
+
+    // Print some avalible device settings.
+    
+    if( capture.get(CAP_OPENNI_IR_GENERATOR_PRESENT) )
+    {
+        cout <<
+            "\nIR generator output mode:" << endl <<
+            "FRAME_WIDTH   " << capture.get(CAP_OPENNI_IR_GENERATOR + CAP_PROP_FRAME_WIDTH) << endl <<
+            "FRAME_HEIGHT  " << capture.get(CAP_OPENNI_IR_GENERATOR + CAP_PROP_FRAME_HEIGHT) << endl <<
+            "FPS           " << capture.get(CAP_OPENNI_IR_GENERATOR + CAP_PROP_FPS) << endl;
+    }
+    else
+    {
+        cout << "\nDevice doesn't contain IR generator or it is not selected." << endl;
+    }
+
+    for(;;)
+    {
+        Mat irImage;
+
+        if( !capture.grab() )
+        {
+            cout << "Can not grab images." << endl;
+            return -1;
+        }
+        else
+        {
+            Mat ir8;
+             int h, w; 
+            	VideoStream ir;       // IR VideoStream Class Object
+   		VideoFrameRef irf;
+            //irImage.resize(720);
+            //capture.read(irImage);
+            const uint16_t* imgBuf = (const uint16_t*)irf.getData();
+           h=irf.getHeight();
+            w=irf.getWidth();
+             //capture.retrieve( imgBuf, 7 );
+                                  // PrimeSense Device Class
+    	
+            frame.create(h, w, CV_16U); // Create the OpenCV Mat Matrix Class Object
+                                        // to receive the IR VideoFrames
+            memcpy(frame.data, imgBuf, h*w*sizeof(uint16_t));
+                                        // Copy the ir data from memory imgbuf -> frame.data
+                                        // using memcpy (a string.h) function
+            frame.convertTo(frame, CV_8U);
+            
+            //if(capture.read(irImage)==0){
+            //cout<<"ERROR"<<endl;
+            //break;
+            //irImage.convertTo(ir8, CV_8U, 256/ 3500,0.0);
+            imshow("IR image", frame);
+        }
+        
+
+        waitKey(20); 
+            //break;
+}
+    return 0;
+}
+/*#include <openni2/OpenNI.h>
+#include <opencv2/opencv.hpp>
+
+
+using namespace openni;
+
+main()
+{
+    OpenNI::initialize();
+    puts( "Kinect initialization..." );
+    Device device;
+    if ( device.open( openni::ANY_DEVICE ) != 0 )
+    {
+        puts( "Kinect not found !" ); 
+        return -1;
+    }
+    puts( "Kinect opened" );
+    VideoStream depth, color;
+    color.create( device, SENSOR_COLOR );
+    color.start();
+    puts( "Camera ok" );
+    depth.create( device, SENSOR_DEPTH );
+    depth.start();
+    puts( "Depth sensor ok" );
+    VideoMode paramvideo;
+    paramvideo.setResolution( 640, 480 );
+    paramvideo.setFps( 30 );
+    paramvideo.setPixelFormat( PIXEL_FORMAT_DEPTH_100_UM );
+    depth.setVideoMode( paramvideo );
+    paramvideo.setPixelFormat( PIXEL_FORMAT_RGB888 );
+    color.setVideoMode( paramvideo );
+    puts( "Réglages des flux vidéos ok" );
+
+    // If the depth/color synchronisation is not necessary, start is faster :
+    device.setDepthColorSyncEnabled( false );
+
+    // Otherwise, the streams can be synchronized with a reception in the order of our choice :
+    //device.setDepthColorSyncEnabled( true );
+    //device.setImageRegistrationMode( openni::IMAGE_REGISTRATION_DEPTH_TO_COLOR );
+
+    VideoStream** stream = new VideoStream*[2];
+    stream[0] = &depth;
+    stream[1] = &color;
+    puts( "Kinect initialization completed" );
+
+
+    if ( device.getSensorInfo( SENSOR_DEPTH ) != NULL )
+    {
+        VideoFrameRef depthFrame, colorFrame;
+        cv::Mat colorcv( cv::Size( 640, 480 ), CV_8UC3, NULL );
+        cv::Mat depthcv( cv::Size( 640, 480 ), CV_16UC1, NULL );
+        cv::namedWindow( "RGB", CV_WINDOW_AUTOSIZE );
+        cv::namedWindow( "Depth", CV_WINDOW_AUTOSIZE );
+
+        int changedIndex;
+        while( device.isValid() )
+        {
+            OpenNI::waitForAnyStream( stream, 2, &changedIndex );
+            switch ( changedIndex )
+            {
+                case 0:
+                    depth.readFrame( &depthFrame );
+
+                    if ( depthFrame.isValid() )
+                    {
+                        depthcv.data = (uchar*) depthFrame.getData();
+                        cv::imshow( "Depth", depthcv );
+                    }
+                    break;
+
+                case 1:
+                    color.readFrame( &colorFrame );
+
+                    if ( colorFrame.isValid() )
+                    {
+                        colorcv.data = (uchar*) colorFrame.getData();
+                        cv::cvtColor( colorcv, colorcv, CV_BGR2RGB );
+                        cv::imshow( "RGB", colorcv );
+                    }
+                    break;
+
+                default:
+                    puts( "Error retrieving a stream" );
+            }
+            cv::waitKey( 1 );
+        }
+
+        cv::destroyWindow( "RGB" );
+        cv::destroyWindow( "Depth" );
+    }
+    depth.stop();
+    depth.destroy();
+    color.stop();
+    color.destroy();
+    device.close();
+    OpenNI::shutdown();
+}
+/*#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <iostream>
+#include <openni2/OpenNI.h>
+#include <openni2/OniCTypes.h>
+#include <openni2/PrimeSense.h>
+
+
+using namespace std;
+using namespace cv;
+using namespace openni;
+
+int main(){
+Device device;        // Software object for the physical device i.e.
+                          // PrimeSense Device Class
+    VideoStream ir;       // IR VideoStream Class Object
+    VideoFrameRef irf;    //IR VideoFrame Class Object
+    VideoMode vmode;      // VideoMode Object
+    Status rc = STATUS_OK;
+ 
+    rc = openni::OpenNI::initialize();    // Initialize OpenNI
+    rc = device.open(openni::ANY_DEVICE); // Open the Device
+    rc = ir.create(device, SENSOR_IR);    // Create the VideoStream for IR
+    rc = ir.start();                      // Start the IR VideoStream
+ 
+    Mat frame;              // OpenCV Matrix Object, also used to store images
+    int h, w;               // Height and Width of the IR VideoFrame
+
+while(true)             // Crux of this project
+{
+    if(device.getSensorInfo(SENSOR_IR) != NULL)
+    {
+        rc = ir.readFrame(&irf);        // Read one IR VideoFrame at a time
+        if(irf.isValid())               // If the IR VideoFrame is valid
+        {
+            vmode = ir.getVideoMode();  // Get the IR VideoMode Info for this video stream.
+                                        // This includes its resolution, fps and stream format.
+            const uint16_t* imgBuf = (const uint16_t*)irf.getData();
+                                        // PrimeSense gives the IR stream as 16-bit data output
+            h=irf.getHeight();
+            w=irf.getWidth();
+            frame.create(h, w, CV_16U); // Create the OpenCV Mat Matrix Class Object
+                                        // to receive the IR VideoFrames
+            memcpy(frame.data, imgBuf, h*w*sizeof(uint16_t));
+                                        // Copy the ir data from memory imgbuf -> frame.data
+                                        // using memcpy (a string.h) function
+            frame.convertTo(frame, CV_8U);
+                                        // OpenCV displays 8-bit data (I'm not sure why?)
+                                        // So, convert from 16-bit to 8-bit
+            namedWindow("ir", 1);       // Create a named window
+            imshow("ir", frame);        // Show the IR VideoFrame in this window
+            char key = waitKey(10);
+            if(key==27) break;          // Escape key number
+        }
+    }
+}
+    ir.stop();                              // Stop the IR VideoStream
+    ir.destroy();
+    device.close();                         // Close the PrimeSense Device
+}*/
+
