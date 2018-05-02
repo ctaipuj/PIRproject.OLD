@@ -25,6 +25,6 @@ This section has the following .cpp files and two .h files in the include direct
 This two algorithms are useful when using a Kinect sensor
 * **photos.cpp** Opens the kinect sensor and takes images
 * **kinect.cpp** Tries to open the kinect sensor
-#### When using a kinect sensor is necessary to use avin2's plugin. Find more information [here](https://github.com/avin2/SensorKinect) and [here](http://blog.justsophie.com/installing-kinect-nite-drivers-on-ubuntu-14-04-and-ros-indigo/)
+#### When using a kinect sensor is necessary to use avin2's plugin. Find more information [here](https://github.com/avin2/SensorKinect), [here](http://blog.justsophie.com/installing-kinect-nite-drivers-on-ubuntu-14-04-and-ros-indigo/) and [here](https://docs.opencv.org/2.4/doc/user_guide/ug_kinect.html)
 
-*Nicolas May 2018*
+*Created by Nicolas May 2018*
