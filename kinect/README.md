@@ -17,15 +17,14 @@ This section has the following .cpp files and two .h files in the include direct
 9. **histo1d.cpp** Creating an histo
 10. **histograma.cpp** other histo
 11. **mat.cpp** How to use a cv::Mat
-12. **negative.cpp** Does 255-i to an image
+12. **negative.cpp** Does 255-pixel_value to an image
 13. **prueba.cpp** A description for histogram class
 14. **roi.cpp** Shows how to use a ROI and stick an image on other
 15. **salt_pepper.cpp** black and white dots over the image
 ## NOTE
 This two algorithms are useful when using a Kinect sensor
-	* **photos.cpp** Opens the kinect sensor and takes images
-	* **kinect.cpp** Tries to open the kinect sensor
-### When using a kinect sensor is necessary to use avin2's plugin. Find more information [here](https://github.com/avin2/SensorKinect) and [here](http://blog.justsophie.com/installing-kinect-nite-drivers-on-ubuntu-14-04-and-ros-indigo/)
+* **photos.cpp** Opens the kinect sensor and takes images
+* **kinect.cpp** Tries to open the kinect sensor
+#### When using a kinect sensor is necessary to use avin2's plugin. Find more information [here](https://github.com/avin2/SensorKinect) and [here](http://blog.justsophie.com/installing-kinect-nite-drivers-on-ubuntu-14-04-and-ros-indigo/)
 
-Nicolas
-May 2018
+*Nicolas May 2018*
