@@ -1,11 +1,11 @@
 # Opencv code samples (A very dummie introduction)
 Here you can find some codes written in *C++* using *OpenCV*. This is a first approach for using very basic functions of *OpenCV*
-##Contents:
+## Contents:
 This section has the following .cpp files and two .h files in the include directory:
-###include Directory:
+### include Directory:
 1. **histograma.h** Used for create an histogram
 2. **colordetection.h** Used for detect colors in an image
-###src Directory:
+### src Directory:
 1. **7up.cpp** Detects green stuff
 2. **blancos.cpp** For white stuff
 3. **canny.cpp** Trying to find edges
@@ -21,11 +21,11 @@ This section has the following .cpp files and two .h files in the include direct
 13. **prueba.cpp** A description for histogram class
 14. **roi.cpp** Shows how to use a ROI and stick an image on other
 15. **salt_pepper.cpp** black and white dots over the image
-##NOTE
+## NOTE
 This two algorithms are useful when using a Kinect sensor
 	* **photos.cpp** Opens the kinect sensor and takes images
 	* **kinect.cpp** Tries to open the kinect sensor
-###When using a kinect sensor is necessary to use avin2's plugin. Find more information [here](https://github.com/avin2/SensorKinect) and [here](http://blog.justsophie.com/installing-kinect-nite-drivers-on-ubuntu-14-04-and-ros-indigo/)
+### When using a kinect sensor is necessary to use avin2's plugin. Find more information [here](https://github.com/avin2/SensorKinect) and [here](http://blog.justsophie.com/installing-kinect-nite-drivers-on-ubuntu-14-04-and-ros-indigo/)
 
 Nicolas
 May 2018
