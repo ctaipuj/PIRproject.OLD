@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/motoman_msgs/share/roseus/ros/motoman_msgs/msg/DynamicJointPoint.l

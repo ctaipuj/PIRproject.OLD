@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/cameras_to_robot/lib/pkgconfig/cameras_to_robot.pc

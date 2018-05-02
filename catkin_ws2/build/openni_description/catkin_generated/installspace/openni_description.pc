@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/install
-
-Name: openni_description
-Description: Description of openni_description
-Version: 1.11.0
-Cflags: 
-Libs: -L/home/ctai/catkin_ws2/install/lib 
-Requires: 

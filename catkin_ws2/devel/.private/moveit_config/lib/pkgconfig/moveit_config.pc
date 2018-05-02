@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/devel/.private/moveit_config
-
-Name: moveit_config
-Description: Description of moveit_config
-Version: 0.2.0
-Cflags: 
-Libs: -L/home/ctai/catkin_ws2/devel/.private/moveit_config/lib 
-Requires: 

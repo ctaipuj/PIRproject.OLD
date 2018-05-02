@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/target_finder/share/common-lisp/ros/target_finder/srv/stereo_locator.lisp

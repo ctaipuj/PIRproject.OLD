@@ -1,7 +1,0 @@
-In file included from [01m[K/home/ctai/catkin_ws2/src/vision/src/image_converter.cpp:1:0[m[K:
-[01m[K/home/ctai/catkin_ws2/src/vision/src/../include/bridge.h:10:32:[m[K [01;31m[Kfatal error: [m[Kvision/bottle_data.h: No such file or directory
-compilation terminated.
-make[2]: *** [CMakeFiles/image_converter.dir/src/image_converter.cpp.o] Error 1
-make[2]: *** Waiting for unfinished jobs....
-make[1]: *** [CMakeFiles/image_converter.dir/all] Error 2
-make: *** [all] Error 2

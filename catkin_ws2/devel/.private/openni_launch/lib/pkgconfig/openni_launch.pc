@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/devel/.private/openni_launch
-
-Name: openni_launch
-Description: Description of openni_launch
-Version: 1.11.0
-Cflags: 
-Libs: -L/home/ctai/catkin_ws2/devel/.private/openni_launch/lib 
-Requires: 

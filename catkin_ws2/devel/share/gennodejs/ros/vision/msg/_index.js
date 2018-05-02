@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/vision/share/gennodejs/ros/vision/msg/_index.js

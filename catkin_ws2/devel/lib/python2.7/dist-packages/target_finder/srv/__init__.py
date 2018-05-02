@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/target_finder/lib/python2.7/dist-packages/target_finder/srv/__init__.py

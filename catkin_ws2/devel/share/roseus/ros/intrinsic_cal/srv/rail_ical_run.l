@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/intrinsic_cal/share/roseus/ros/intrinsic_cal/srv/rail_ical_run.l

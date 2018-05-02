@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/robo_cylinder/share/gennodejs/ros/robo_cylinder/srv/StatusUpdate.js

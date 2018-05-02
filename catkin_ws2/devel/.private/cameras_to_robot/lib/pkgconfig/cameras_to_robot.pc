@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/devel/.private/cameras_to_robot
-
-Name: cameras_to_robot
-Description: Description of cameras_to_robot
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ctai/catkin_ws2/devel/.private/cameras_to_robot/lib 
-Requires: 

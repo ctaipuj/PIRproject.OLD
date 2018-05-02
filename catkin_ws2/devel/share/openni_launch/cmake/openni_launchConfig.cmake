@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/openni_launch/share/openni_launch/cmake/openni_launchConfig.cmake

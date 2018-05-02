@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/openni_camera/lib/python2.7/dist-packages/openni_camera/cfg/OpenNIConfig.py

@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/intrinsic_cal/share/gennodejs/ros/intrinsic_cal/srv/rail_scal_run.js

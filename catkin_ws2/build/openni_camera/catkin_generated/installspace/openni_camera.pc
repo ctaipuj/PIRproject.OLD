@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/install
-
-Name: openni_camera
-Description: Description of openni_camera
-Version: 1.11.0
-Cflags: -I/home/ctai/catkin_ws2/install/include -I/usr/include -I/usr/include/ni
-Libs: -L/home/ctai/catkin_ws2/install/lib -lopenni_nodelet -lopenni_driver /usr/lib/x86_64-linux-gnu/libboost_system.so /usr/lib/x86_64-linux-gnu/libboost_filesystem.so /usr/lib/x86_64-linux-gnu/libboost_thread.so -lOpenNI
-Requires: camera_info_manager dynamic_reconfigure image_transport nodelet roscpp

@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/install
-
-Name: motoman_msgs
-Description: Description of motoman_msgs
-Version: 0.3.5
-Cflags: -I/home/ctai/catkin_ws2/install/include
-Libs: -L/home/ctai/catkin_ws2/install/lib 
-Requires: message_runtime std_msgs trajectory_msgs industrial_msgs genmsg

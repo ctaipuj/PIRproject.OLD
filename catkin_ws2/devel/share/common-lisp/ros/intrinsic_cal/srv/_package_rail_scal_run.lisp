@@ -1,1 +1,0 @@
-/home/ctai/catkin_ws2/devel/.private/intrinsic_cal/share/common-lisp/ros/intrinsic_cal/srv/_package_rail_scal_run.lisp

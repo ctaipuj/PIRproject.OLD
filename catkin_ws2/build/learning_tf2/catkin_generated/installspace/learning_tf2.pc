@@ -1,8 +1,0 @@
-prefix=/home/ctai/catkin_ws2/install
-
-Name: learning_tf2
-Description: Description of learning_tf2
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ctai/catkin_ws2/install/lib 
-Requires: 
