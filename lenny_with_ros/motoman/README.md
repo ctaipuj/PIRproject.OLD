@@ -18,6 +18,12 @@ branches may be unstable. Releases are made from the distribution branches
 Older releases may be found in the old ROS-Industrial [subversion repository][]
 archive.
 
+### Note 
+
+See *motoman_sda10f_moveit_config* and *motoman_sda10f_support* where modified files are included in order to be used with CTAI's robot
+
+*Modified by Nicolas May 2018
+
 [ROS-Industrial]: http://wiki.ros.org/Industrial
 [ROS wiki]: http://wiki.ros.org/motoman
 [motoman_experimental]: https://github.com/ros-industrial/motoman_experimental
