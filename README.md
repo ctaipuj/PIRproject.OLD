@@ -12,15 +12,15 @@ The system proposed is based on open source software, using the Robot Operating 
 
 ## Lenny with ROS
 
-Contains different ROS-packages created/modified, these packages are used to operate a SDA10F dual arm robot with ROS, in order to develop a classification task using computer vision
+Contains different ROS-packages created/modified. these packages are used to operate a SDA10F dual arm robot with ROS, in order to develop a classification task using computer vision
 
 ## OpenCV for rookies
 
 Some algorithms created using OpenCV used with OpenNI sensors. Includes the photos.cpp useful when working with a kinect sensor.
 
-##Documented Code
+## Documented Code
 
-This is THE directory where all the computer vision and ROS nodes are described. Here you can find the Oxigen documentation and the source code with the original comments.
+This is THE directory where all the computer vision and ROS nodes are described. Here you can find the Doxygen documentation and the source code with the original comments.
 
 ### About Centro Tecnologico De Automatizacion Industrial CTAI @ PUJ Bogotá-Colombia
 
