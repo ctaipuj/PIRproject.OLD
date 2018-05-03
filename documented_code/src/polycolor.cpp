@@ -28,7 +28,7 @@ cv::Mat polycolor::getwhite(cv::Mat hsv,int s,int v){
 cv::Mat polycolor::getred(cv::Mat h,int r1,int r2){
 
 	cv::Mat maskred;
-	cv::Mat lut(1,256,CV_8U); 
+	cv::Mat lut(1,256,CV_8U); //rojo
 
 	for (int i=0;i<256;i++){
 		if(i<r1 || i>r2){
@@ -45,7 +45,7 @@ cv::Mat polycolor::getred(cv::Mat h,int r1,int r2){
 cv::Mat polycolor::getblue(cv::Mat h,int a1,int a2){
 
 	cv::Mat maskblue;
-	cv::Mat lut(1,256,CV_8U); 
+	cv::Mat lut(1,256,CV_8U); //azules
 	for (int i=0;i<256;i++){
 		if(i>a1 && i<a2){
 			lut.at<uchar>(i)=255;
@@ -61,7 +61,7 @@ cv::Mat polycolor::getblue(cv::Mat h,int a1,int a2){
 cv::Mat polycolor::getgreen(cv::Mat h,int g1,int g2){
 	
 	cv::Mat maskgreen;
-	cv::Mat lut(1,256,CV_8U);
+	cv::Mat lut(1,256,CV_8U); //Verde
 	for (int i=0;i<256;i++){
 		if(i>g1 && i<g2){
 			lut.at<uchar>(i)=255;
@@ -77,10 +77,10 @@ cv::Mat polycolor::getgreen(cv::Mat h,int g1,int g2){
 cv::Mat polycolor::getsaturation(cv::Mat s,int s0,int s1,int s2){
 
 	cv::Mat masksaturation;
-	cv::Mat lut(1,256,CV_8U); 
+	cv::Mat lut(1,256,CV_8U); //saturation
 	
 	for (int i=0;i<256;i++){
-		if(i>s0 && i<s1 || i>s2){
+		if(i>s0 && i<s1 || i>s2){//90){//140
 			lut.at<uchar>(i)=255;
 		}else{
 			lut.at<uchar>(i)=0;
@@ -94,7 +94,7 @@ cv::Mat polycolor::getsaturation(cv::Mat s,int s0,int s1,int s2){
 cv::Mat polycolor::getvalue(cv::Mat v,int v1,int v2){
 
 	cv::Mat maskvalue;
-	cv::Mat lut(1,256,CV_8U); 
+	cv::Mat lut(1,256,CV_8U); //Value
 	
 	for (int i=0;i<256;i++){
 		if(i>v1 && i<v2){//144){//235){//90){//140
@@ -122,10 +122,11 @@ cv::Mat polycolor::findcolors(cv::Mat maskwhite,cv::Mat maskred,cv::Mat maskgree
 	cv::bitwise_not(maskgreen,maskgreen);
 		
 	cv::bitwise_or(maskred,maskblue,colors);
+	
 	cv::bitwise_and(maskvalue,colors,value_colors);
-	cv::bitwise_and(value_colors,maskwhite,no_white_color);
+	cv::bitwise_and(value_colors,maskwhite,no_white_color);   
 	cv::bitwise_and(no_white_color,maskgreen,segmented);
-	//cv::imshow("blank",segmented);  
+	
 	return segmented;
 }
 
@@ -133,6 +134,7 @@ cv::Mat polycolor::findgreen(cv::Mat maskgreen,cv::Mat maskwhite,cv::Mat maskval
 
 	cv::Mat green_bottles;
 	cv::Mat real_green;
+	
 	cv::dilate(maskwhite,maskwhite,cv::Mat(),cv::Point(-1,-1),6);	
 	//cv::dilate(maskgreen,maskgreen,cv::Mat(),cv::Point(-1,-1),4);
 	
@@ -140,13 +142,16 @@ cv::Mat polycolor::findgreen(cv::Mat maskgreen,cv::Mat maskwhite,cv::Mat maskval
 	cv::bitwise_and(maskgreen,maskwhite,real_green);
 	//cv::imshow("G1",maskgreen);
 	//cv::imshow("G2",real_green);
+	
 	cv::bitwise_and(real_green,maskvalue,green_bottles);
+	
 	return green_bottles;
 }
 
 cv::Mat polycolor::findwhite(cv::Mat maskwhite,cv::Mat maskvalue){
 	
 	cv::Mat white;
+
 	cv::dilate(maskwhite,maskwhite,cv::Mat(),cv::Point(-1,-1),6);
 	cv::bitwise_and(maskwhite,maskvalue,white);
 	
@@ -161,7 +166,7 @@ vector<vector<cv::Point> > polycolor::findcontours(cv::Mat proc,int cmin,int cma
 	vector<vector<cv::Point> > contornos(max_detection);//Vector de vectores donde se almacenan los contornos  
 	
 	cv::morphologyEx(proc,edges,cv::MORPH_GRADIENT,cv::Mat()); //usar operacion gradiente para hallar bordes*/
-	cv::findContours(edges,contornos,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE); //OJO MODIFICADO CV_CHAIN_APPROX_NONE //encontrar contornos, solo externos, sin jerarquias
+ 	cv::findContours(edges,contornos,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE); //OJO MODIFICADO CV_CHAIN_APPROX_NONE //encontrar contornos, solo externos, sin jerarquias
  	vector<vector<cv::Point> >::iterator itc= contornos.begin();//Iterador para los n contornos hallados
 	
 	while (itc!=contornos.end()) { //mientras hayan contornos

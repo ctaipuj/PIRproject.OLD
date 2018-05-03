@@ -1,4 +1,3 @@
-//#include "../include/bridge.h"
 #include "../include/perception.h"
 #include "../include/detection.h"
 #include "../include/test.h"
@@ -96,11 +95,9 @@ int main(int argc, char* argv[]){
 		cv::Mat imageblurred;
 		cv::Mat hsv;
     
-		cv::GaussianBlur(image,imageblurred,cv::Size(31,31),0); //filtrar la imagen usando gauss
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/blurred.png",imageblurred);
-		cv::cvtColor(imageblurred,hsv,CV_BGR2HSV); //cambio de campo de color
-    		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/hsv.png",hsv);
-		vector<cv::Mat> canaleshsv; //separar los tres canales de la imagen HSV
+		cv::GaussianBlur(image,imageblurred,cv::Size(31,31),0); /
+		cv::cvtColor(imageblurred,hsv,CV_BGR2HSV); 
+		vector<cv::Mat> canaleshsv; 
 		vector<cv::Mat> canalesycrcb;
 	
 		vector<cv::Point> colorpoints;
@@ -125,24 +122,12 @@ int main(int argc, char* argv[]){
 		cv::namedWindow("Blancos Segmentada", CV_WINDOW_NORMAL );
 	
 		cv::split(hsv,canaleshsv);
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/h.png",canaleshsv[0]);
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/s.png",canaleshsv[1]);
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/v.png",canaleshsv[2]);
-		
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/color.png",c.findcolors(c.getwhite(hsv,25,133),c.getred(canaleshsv[0],50,130),c.getgreen(canaleshsv[0],55,96),c.getblue(canaleshsv[0],95,130),c.getvalue(canaleshsv[2],90,144)));
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/green.png",c.findgreen(c.getgreen(canaleshsv[0],55,88),c.getwhite(hsv,25,133),c.getvalue(canaleshsv[2],72,144)));
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/white.png",c.findwhite(c.getwhite(hsv,25,133),c.getvalue(canaleshsv[2],90,144)));
 	
 		data_color=c.findcontours(c.findcolors(c.getwhite(hsv,25,133),c.getred(canaleshsv[0],50,130),c.getgreen(canaleshsv[0],55,96),c.getblue(canaleshsv[0],95,130),c.getvalue(canaleshsv[2],90,144)),90,670,max_detection);//110 para no detectar manijas. 90 u 88 detecta tapas
 	
 		data_green=c.findcontours(c.findgreen(c.getgreen(canaleshsv[0],55,88),c.getwhite(hsv,25,133),c.getvalue(canaleshsv[2],72,144)),193,515,max_detection);//minimo 88 400
 
-		data_white=c.findcontours(c.findwhite(c.getwhite(hsv,25,133),c.getvalue(canaleshsv[2],90,144)),110,705,max_detection);	
-	
-    
-	//cv::Mat color=c.findcolors(c.getwhite(hsv,25,133),c.getred(canaleshsv[0],33,130),c.getgreen(canaleshsv[0],43,88),c.getblue(canaleshsv[0],95,130),c.getvalue(canaleshsv[2],90,144)); //Metodo para hallar botellas de color
-	
-	
+		data_white=c.findcontours(c.findwhite(c.getwhite(hsv,25,133),c.getvalue(canaleshsv[2],90,144)),110,705,max_detection);		
 	
 		if(data_color.size()!=0){
 			colorpoints=s.getpoints(data_color);
@@ -166,19 +151,7 @@ int main(int argc, char* argv[]){
 			cv::imshow("Blancos Segmentada",c.drawcontors(image,data_white,255,218,185));
 		
 	}
-		//cv::imwrite("/home/ctai/algorithm/document/test_protocol/detection.png",image);
-	//////////////////////////////////////////////////////////////////////////////
-	////////////////////////////CODIGO MODIFICADO/////////////////////////////////
-
-	/*	vector<double> print;
-		print=t.get_data_to_print(t.get_data(image.cols,image.rows,data_color,band),t.get_data(image.cols,image.rows,data_green,band),t.get_data(image.cols,image.rows,data_white,band),i,band);
-		for(int k=0;k<print.size()-1;k++){
-			file<<print[k]<<",";
-		}
-		file<<print[print.size()-1];
-		file<<"\n";*/
-	///////////////////////////////////////////////////////////////////////////////	
-	
+		
 		vector<vector<double> > p; //data_to_ros;
 			
 		p= s.push_data(s.getgeometrydata(color_coordinates,data_color,1,fx,fy,1),s.getgeometrydata(green_coordinates,data_green,2,fx,fy,1),s.getgeometrydata(white_coordinates,data_white,3,fx,fy,1));
@@ -186,15 +159,12 @@ int main(int argc, char* argv[]){
 		//data_to_ros=p;
 	
 		for (int j=0;j<p.size();j++){
-			//cout<<pepe[j][0];
+			
 			cout<<" X "<<p[j][0]<<" Y "<<p[j][1]<<" Z "<<p[j][2]<<" w "<<p[j][3]<<" x "<<p[j][4]<<" y "<<p[j][5]<<" z "<<p[j][6]<<" Height "<<p[j][7]<<" Width "<<p[j][8]<<" Type "<<p[j][9]<<"\n";
 		
 			file<<" X "<<p[j][0]<<" Y "<<p[j][1]<<" Z "<<p[j][2]<<" w "<<p[j][3]<<" x "<<p[j][4]<<" y "<<p[j][5]<<" z "<<p[j][6]<<" Height "<<p[j][7]<<" Width "<<p[j][8]<<" Type "<<p[j][9]<<"\n";
 		}
-		//cout<<colorpoints<<depth.size()<<image.size()<<"dfghjklhgfdfghjklkjhgfdfghjkl"<<alpha<<"\n";
-		//cv::imshow("Prueba",prueba);  
-		//cout<<prueba;
-		//cout<<"hkfgsfgk"<<depth.at<uint16_t>(250,246);*/
+		
 	cv::waitKey(0);
 	std::string save;
 	std::stringstream savve;
