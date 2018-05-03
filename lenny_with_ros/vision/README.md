@@ -8,6 +8,9 @@ This package integrates a computer vision algorithm with ROS's moveit! to perfor
 2. **msg** A created message
 3. **include** .h files for the computer vision task
 4. **src** .cpp files of the computer vision task
+	* **kinect_to_robot.cpp** is a ROS node that creates a tf between the `camera_link` and the `torso_base_link`
+	* **fake_k_roll.cpp** Is a node that publish a fake variable. Used for individual test. 
+	* **image_converter.cpp** The main node that manages the ROS' image data type and transforms it into *OpenCV* image data executes the 3d pose estimation and publish spatial coordinates to ROS.
 
 ### NOTE
 
