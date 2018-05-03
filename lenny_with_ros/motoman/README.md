@@ -22,7 +22,7 @@ archive.
 
 See *motoman_sda10f_moveit_config* and *motoman_sda10f_support* where modified files are included in order to be used with CTAI's robot
 
-*Modified by Nicolas May 2018
+*Modified by Nicolas May 2018*
 
 [ROS-Industrial]: http://wiki.ros.org/Industrial
 [ROS wiki]: http://wiki.ros.org/motoman
