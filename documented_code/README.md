@@ -10,17 +10,13 @@ The main purpose of this research is to make a first approach to analyze the was
 
 The system proposed is based on open source software, using the Robot Operating System (ROS) and the OpenCV libraries for developing the image processing algorithm. The system consists on four stages; the first stage uses the OpenCV libraries to design a computer vision algorithm. The second stage uses the data acquired by the CV algorithm to locate the bottles on the work-table and characterize them it by their type and geometry. The third stage uses the pose and the type of object detected in the previous stage, to plan the robot’s trajectory. The last stage converts all the information into the robot’s commands that the controller of the robot and the controller of the gripper will interpret in order to execute the pick and place task. 
 
-## Lenny with ROS
+## SDA10F Motoman Yaskawa Setup
 
-Contains different ROS-packages created/modified, these packages are used to operate a SDA10F dual arm robot with ROS, in order to develop a classification task using computer vision
+Setup files needed (based on the motoman package) for using the **SDA10F yaskawa robot** @ CTAI.
 
-## OpenCV for rookies
+## Kinect
 
 Some algorithms created using OpenCV used with OpenNI sensors. Includes the photos.cpp useful when working with a kinect sensor.
-
-##Documented Code
-
-This is THE directory where all the computer vision and ROS nodes are described. Here you can find the Oxigen documentation and the source code with the original comments.
 
 ### About Centro Tecnologico De Automatizacion Industrial CTAI @ PUJ Bogotá-Colombia
 
