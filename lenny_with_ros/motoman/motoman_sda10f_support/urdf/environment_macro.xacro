@@ -1,18 +1,39 @@
 <?xml version="1.0" ?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro">
+<model xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:macro name="environment" params="name prefix">
 	
 		<!-- link list -->
 	<link name="conveyor">
 		<visual>
 			<geometry>
-				<mesh filename="package://motoman_sda10f_support/meshes/environment/conveyor.STL"/>
+				<mesh filename="package://motoman_sda10f_support/meshes/environment/conveyor.stl" scale="0.01 0.01 0.01"/>
 				<!--IF .STL IS IN mm DUE SOLIDWORKS CONFLICT USE: scale="0.001 0.001 0.001" in mesh line-->
 			</geometry>
 			<origin xyz="0 0 0"/>
-			<material name="blue">
-				<color rgba="255 69 30 0.9"/>
+			<material name="gray_conveyor">
+				<texture filename="package://motoman_sda10f_support/meshes/environment/textures/silver.png"/>
+				<!--color rgba="${240/255} ${240/255} ${240/255} 1"/-->
 			</material>
+		</visual>
+</link>
+
+	<link name="feeder_table">
+		<visual>
+			<geometry>
+				<mesh filename="package://motoman_sda10f_support/meshes/environment/feeder_table.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+			<origin xyz="0 0 0"/>
+			<material name="gray_conveyor"/>
+		</visual>
+</link>
+
+	<link name="feeder_table_2">
+		<visual>
+			<geometry>
+				<mesh filename="package://motoman_sda10f_support/meshes/environment/feeder_table.stl" scale="0.01 0.01 0.01"/>
+			</geometry>
+			<origin xyz="0 0 0"/>
+			<material name="gray_conveyor"/>
 		</visual>
 </link>
 
@@ -22,8 +43,9 @@
 				<mesh filename="package://motoman_sda10f_support/meshes/environment/table.STL"/>
 			</geometry>
 			<origin xyz="-0.615 0 -0.76"/>
-			<material name="blue">
-				<color rgba="255 69 30 0.9"/>
+			<material name="beige_table">
+				<!--color rgba="${249/255} ${226/255} ${211/255} 1"/-->
+				<texture filename="package://motoman_sda10f_support/meshes/environment/textures/beige.png"/>
 			</material>
 		</visual>
 </link>
@@ -32,11 +54,10 @@
 		<visual>
 			<geometry>
 				<mesh filename="package://motoman_sda10f_support/meshes/environment/worktable.STL" scale="0.001 0.001 0.001"/>
-				<!--IF .STL IS IN mm DUE SOLIDWORKS CONFLICT USE: scale="0.001 0.001 0.001" in mesh line-->
 			</geometry>
 			<origin xyz="-0.625 0 0"/>
-			<material name="blue">
-				<color rgba="255 69 30 0.9"/>
+			<material name="gray_worktable">
+				<color rgba="${45/255} ${135/255} ${149/255} 1"/>
 			</material>
 		</visual>
 </link>
@@ -47,8 +68,8 @@
 				<mesh filename="package://motoman_sda10f_support/meshes/environment/beacon.STL"/>
 			</geometry>
 			<origin xyz="-0.035 0 -0.035"/>
-			<material name="blue">
-				<color rgba="255 69 30 0.9"/>
+			<material name="yellow_beacon">
+				<color rgba="${255/255} ${255/255} ${0/255} 1"/>
 			</material>
 		</visual>
 </link>
@@ -71,18 +92,48 @@
 				<mesh filename="package://motoman_sda10f_support/meshes/environment/MPS.STL"/>
 			</geometry>
 			<origin xyz="-0.7 0 -1.40"/>
-			<material name="blue">
-				<color rgba="255 69 30 0.9"/>
+			<material name="festo">
+				<texture filename="package://motoman_sda10f_support/meshes/environment/textures/aqua.png"/>
 			</material>
 		</visual>
+		<collision>
+				<geometry>
+					<mesh filename="package://motoman_sda10f_support/meshes/environment/MPS.STL" />
+				</geometry>
+				<origin xyz= "-0.7 0 -1.40"/>
+		</collision>
 </link>
+
+	<!--link name="MPS_FAKE">
+		<visual>
+			<geometry>
+				<mesh filename="package://motoman_sda10f_support/meshes/environment/MPS_FAKE.stl" scale="0.008 0.008 0.008"/>
+			</geometry>
+			<origin xyz="0 0 0"/>
+			<material name="cyan_mps">
+				<color rgba="${168/255} ${224/255} ${198/255} 1"/>
+			</material>
+		</visual>
+</link-->
 
 		<!-- joint list -->
 	<joint name="coveyor_to_robot" type="fixed">
 		<parent link="torso_base_link"/>
 		<child link="conveyor"/>
-		<origin xyz="-2.92 -2.45 0.13" rpy="0 0 -1.571"/>
-				<!--WRITE 0.4 IN Z IF THE ROBOT IS AT THE SAME HEIGHT OF THE CONVEYOR-->
+		<!--origin xyz="-2.92 -2.45 0.13" rpy="0 0 -1.571"/-->
+		<origin xyz="0.618 -1.244 -0.252" rpy="0 0 -1.571"/>
+	</joint>
+	
+	<joint name="feeder_table_to_robot" type="fixed">
+		<parent link="torso_base_link"/>
+		<child link="feeder_table"/>
+		<origin xyz="0.05 0.47 -0.3" rpy="0 0 1.5708"/>
+	</joint>
+	
+	<joint name="feeder_table_2_to_robot" type="fixed">
+		<parent link="feeder_table"/>
+		<child link="feeder_table_2"/>
+		<origin xyz="1.11 0 0" rpy="0 0 0"/>
 	</joint>
 	
 	<joint name="table_to_robot" type="fixed">
@@ -115,6 +166,12 @@
 		<origin xyz="-0.111 -1.405 -0.3" rpy="1.571 0 1.571"/> <!--Sumo 5cm a las MPS por si acaso-->
 	</joint>
 	
+		<!--joint name="MPS_FAKE_to_robot" type="fixed">
+		<parent link="torso_base_link"/>
+		<child link="MPS_FAKE"/>
+		<origin xyz="-1.35 0.6 -0.3" rpy="0 0 -1.5708"/--> <!--Sumo 5cm a las MPS por si acaso-->
+	<!--/joint-->
+	
 		<!-- end of joint list -->
 	
 	</xacro:macro>
@@ -122,4 +179,4 @@
 	<xacro:environment name="environment" prefix="environment_"/>
 	
 	
-</robot>
+</model>

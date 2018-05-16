@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro">
+<model xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:macro name="kinect" params="name prefix">
 	
 		<!-- link list -->
@@ -9,8 +9,8 @@
 				<mesh filename="package://motoman_sda10f_support/meshes/camera/kinect_base.STL"/>
 			</geometry>
 			<origin xyz="-0.14 0 0"/>
-			<material name="black">
-				<color rgba="176 176 176 0.9"/>
+			<material name="green_kinect">
+				<color rgba="${68/255} ${218/255} ${63/255} 1"/>
 			</material>
 		</visual>
 		<collision>
@@ -18,9 +18,6 @@
 					<mesh filename="package://motoman_sda10f_support/meshes/camera/kinect_collision.STL" />
 				</geometry>
 				<origin xyz= "-0.16 0 0"/>
-				<material name="black">
-					<color rgba="176 176 176 0.9"/>
-				</material>
 		</collision>
 	</link>
 
@@ -30,8 +27,8 @@
 				<mesh filename="package://motoman_sda10f_support/meshes/camera/kinect_kinect.STL"/>
 			</geometry>
 			<origin xyz="-0.14 0 0"/>
-			<material name="black">
-				<color rgba="176 176 176 0.9"/>
+			<material name="orange_kinect">
+				<color rgba="${244/255} ${94/255} ${0/255} 1"/>
 			</material>
 		</visual>
 	</link>
@@ -49,7 +46,7 @@
 	<joint name="base_kinect_to_robot" type="fixed"> <!--ACTUALIZAR CON DATA REAL OJO MODIFICAR AQUI-->
 		<parent link="torso_base_link"/>
 		<child link="base_kinect"/>
-		<origin xyz="0.894 0.056 2.09" rpy="1.54 0 -1.52"/> <!--origin xyz="0.148 0.845 1.6425" rpy="1.54 0 -3.14"/> <ESTA ES LA TRANSFORMADA QUE HAY QUE MEDIR menos 30cm en Z-->
+		<origin xyz="0.817 0.056 2.07" rpy="1.54 0 -1.52"/> <!--origin xyz="0.148 0.845 1.6425" rpy="1.54 0 -3.14"/> <ESTA ES LA TRANSFORMADA QUE HAY QUE MEDIR menos 30cm en Z-->
 	</joint>
 	
 	<joint name="base_kinect_to_kinect" type="fixed">
@@ -63,4 +60,4 @@
 	
 	<xacro:kinect name="kinect" prefix="kinect_"/>
 	
-</robot>
+</model>

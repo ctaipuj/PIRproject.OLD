@@ -12,4 +12,6 @@ This folder contains packages that were modified or created in order to execute 
 
 3. **vision** This is the package created in order to integrate the computer vision task based on *OpenCV* with the execution task of the robot with moveit!
 
+4. **Robotiq** Gripper's package developed by robotiq.
+
 *Created by Nicolas May 2018*
