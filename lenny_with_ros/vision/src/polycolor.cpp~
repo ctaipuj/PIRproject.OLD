@@ -162,96 +162,34 @@ vector<vector<cv::Point> > polycolor::findcontours(cv::Mat proc,int cmin,int cma
 
 	cv::Mat edges;
 	cv::RotatedRect r;
-
+	
 	vector<vector<cv::Point> > contornos(max_detection);//Vector de vectores donde se almacenan los contornos  
 	
 	cv::morphologyEx(proc,edges,cv::MORPH_GRADIENT,cv::Mat()); //usar operacion gradiente para hallar bordes*/
-	cv::findContours(edges,contornos,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE); //OJO MODIFICADO CV_CHAIN_APPROX_NONE //encontrar contornos, solo externos, sin jerarquias
+ 	cv::findContours(edges,contornos,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE); //encontrar contornos, solo externos, sin jerarquias
  	vector<vector<cv::Point> >::iterator itc= contornos.begin();//Iterador para los n contornos hallados
 	
 	while (itc!=contornos.end()) { //mientras hayan contornos
+		
 		if (itc->size() < cmin|| itc->size() > cmax)//eliminar los menores o los mayores
 			itc= contornos.erase(itc); //Eliminar contornos que no se ajusten a las medidas correspondientes
 		else
 			++itc;//si se ajusta evalue el siguiente	
 	}
 	
-	clean_contours(proc, &contornos);
-	return contornos;
-}
-
-void polycolor::clean_contours(cv::Mat image, vector<vector<cv::Point> > * contornos){ //****FUNCION CREADA PARA CAMBIOS DEL WORKTABLE EN EL 2018****
-	
-	vector<vector<cv::Point> >::iterator itc= contornos->begin();
-	
-	while (itc!=contornos->end()) { //mientras hayan contornos
-		cv::Moments mom=cv::moments(cv::Mat(*itc));
-		cv::RotatedRect r= cv::fitEllipse(cv::Mat(*itc));
-		if (r.size.width<50||r.size.width>230||r.size.height<68 || image.cols/32>mom.m10/mom.m00 || image.cols*7/8<mom.m10/mom.m00 || image.rows/8>mom.m01/mom.m00 || image.rows*22/32<mom.m01/mom.m00)//eliminar los menores o los mayores
-			itc= contornos->erase(itc); //Eliminar contornos que no se ajusten a las medidas correspondientes
-		else
-			++itc;//si se ajusta evalue el siguiente	
-	}
-}
-	
-
-/*vector<vector<cv::Point> > polycolor::findcontours(cv::Mat proc,int cmin,int cmax,int max_detection){
-
-	cv::Mat edges;
-	cv::RotatedRect r;
-	
-	vector<vector<cv::Point> > contornos(max_detection);//Vector de vectores donde se almacenan los contornos  
-	
-	cv::morphologyEx(proc,edges,cv::MORPH_GRADIENT,cv::Mat()); //usar operacion gradiente para hallar bordes
- 	cv::findContours(edges,contornos,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_SIMPLE); //OJO MODIFICADO CV_CHAIN_APPROX_NONE //encontrar contornos, solo externos, sin jerarquias
- 	vector<vector<cv::Point> >::iterator itc= contornos.begin();//Iterador para los n contornos hallados
-	
-	while (itc!=contornos.end()) { //mientras hayan contornos
-	
-		cv::Moments mom=cv::moments(cv::Mat(*itc));
-		
-		if (itc->size() < cmin|| itc->size() > cmax)//eliminar los menores o los mayores
-			itc= contornos.erase(itc); //Eliminar contornos que no se ajusten a las medidas correspondientes
-		else{
-			if (itc->size()<=10 || mom.m00==0)
-				itc= contornos.erase(itc);
-			else{
-				cv::Point P= cv::Point(mom.m10/mom.m00,mom.m01/mom.m00);
-			
-				if(proc.cols/8>=P.x || proc.cols*7/8<=P.x)  //OJO MODIFICADO PARA SOLO EVALUAR DATOS DENTRO DEL ROI
-					itc=contornos.erase(itc);
-				//else{
-				//	if (proc.rows/8>=P.y || proc.rows*22/32<=P.y)
-				//		itc=contornos.erase(itc);
-				//		}
-			//	else{
-			//		r=cv::fitEllipse(cv::Mat(*itc));
-			//		if(r.size.width<50||r.size.width>230||r.size.height<68)//210
-			//			itc=contornos.erase(itc);
-			//	}
-			//}
-		}
-		++itc;}//si se ajusta evalue el siguiente
-	}
-		
-	/*for (int i=0;i<contornos.size();i++){
+	for (int i=0;i<contornos.size();i++){
 		cv::Moments mom=cv::moments(contornos[i]);
 		if(contornos[i].size()<=10 || mom.m00==0){
 			contornos.erase(contornos.begin()+i);
 		}
-		else if(proc.cols>mom.m10/mom.m00 || proc.cols*7/8<mom.m10/mom.m00 || proc.rows/8>mom.m01/mom.m00 || proc.rows*22/32<mom.m01/mom.m00){//OJO MODIFICADO PARA SOLO EVALUAR DATOS DENTRO DEL ROI
+		else{
+			r=cv::fitEllipse(contornos[i]);
+			if(r.size.width<50||r.size.width>230||r.size.height<68)//210
 				contornos.erase(contornos.begin()+i);
-				cout<<"punto ("<<mom.m10/mom.m00<<" , "<<mom.m01/mom.m00<<")   DFGHJBVGHJHGH\n";
-			}
-			else{
-				r=cv::fitEllipse(contornos[i]);
-				if(r.size.width<5000||r.size.width>0||r.size.height<6000)//210
-					contornos.erase(contornos.begin()+i);
-				}
-			
+		}
 	}
 	return contornos;
-}*/
+}
 
 cv::Mat polycolor::drawcontors(cv::Mat image,vector<vector<cv::Point> > contornos,int r,int g,int b){
 
@@ -274,52 +212,4 @@ cv::Mat polycolor::drawcontors(cv::Mat image,vector<vector<cv::Point> > contorno
 		//cout<<cv::Point(mom.m10/mom.m00,mom.m01/mom.m00)<<"\n"; // Imprima los centros de masa solo para probar
 	}
 	return image;
-}
-
-cv::Mat polycolor::write_id(cv::Mat image,vector<vector<double> > centers, vector<vector<double> > coordinates){
-	
-	if(centers.empty())
-		return image;
-	
-	std::string s;
-	std::stringstream ss;
-	int n=0;
-		
-	for(int i=0;i<centers.size();i++){
-		if(centers[i][3]==0){
-		ss<<"ID:"<<n+1<<" (X:"<<coordinates[n][0]<<"Y:"<<coordinates[n][1];
-		s=ss.str();
-		cv::putText(image,s,cv::Point(centers[i][0],centers[i][1]),CV_FONT_HERSHEY_SIMPLEX,0.5,cv::Scalar(255,255,0),0.8);
-		ss.str("");
-		ss<<"Z:"<<coordinates[n][2]<<")";
-		s=ss.str();
-		cv::putText(image,s,cv::Point(centers[i][0],centers[i][1]+15),CV_FONT_HERSHEY_SIMPLEX,0.5,cv::Scalar(255,255,0),0.8);
-		ss.str("");
-		n++;
-		}
-	}
-	return image;
-}
-
-/*vector<vector<cv::Point> > polycolor::push_contours(vector<vector<cv::Point> > color, vector<vector<cv::Point> > green, vector<vector<cv::Point> > white){
-
-	vector<vector<cv::Point> > data_to_ros;
-	
-	if(!color.empty())
-		pusher(color, data_to_ros);
-	
-	if(!green.empty())
-		pusher(green, data_to_ros);
-	
-	if(!white.empty())
-		pusher(white, data_to_ros);
-	
-	return data_to_ros;
-}	*/	
-		
-void polycolor::pusher(vector<vector<double> > A, vector<vector<double> > &push_data){
-	
-	for(int i =0;i<A.size();i++){
-		push_data.push_back(A[i]);	
-	}
 }
