@@ -20,7 +20,7 @@ class space{
 	
 	std::vector<cv::Point> scale(std::vector<cv::Point> Points,int  originalcols, int originalrows, int tinycols, int tinyrows);
 	
-	std::vector<std::vector<double> > find_depth(std::vector<cv::Point> Points_scaled,std::vector<cv::Point> Points_real,cv::Mat depth,std::vector<std::vector<cv::Point> > &contornos);
+	std::vector<std::vector<double> > find_depth(std::vector<cv::Point> Points_scaled,std::vector<cv::Point> Points_real,cv::Mat depth);
 	
 	std::vector<std::vector<double> > xyz_coord(std::vector<std::vector<double> > Points, double fx, double fy, double cx, double cy);
 	
@@ -30,7 +30,7 @@ class space{
 	
 	std::vector<std::vector<double> > push_data(std::vector<std::vector<double> > color,std::vector<std::vector<double> > green, std::vector<std::vector<double> > white);
 		
-	void pusher(std::vector<std::vector<double> > & A, std::vector<std::vector<double> > &data_to_ros);
+	void pusher(std::vector<std::vector<double> > &A, std::vector<std::vector<double> > &data_to_ros);
 	
 };
 #endif

@@ -2,9 +2,6 @@
 #include "../include/perception.h"
 #include "../include/detection.h"
 
-
-
-
 #include<boost/assign/std/vector.hpp>
 
 int k_roll=1;
@@ -60,7 +57,7 @@ void ImageConverter::kinect_color_callback(const sensor_msgs::ImageConstPtr& col
 	}
 
 	cv::imshow("Color Image", cv_ptr_color->image);
-	cv::waitKey(3);
+	////////////cv::waitKey(3);
 	// Output modified video stream
 	//image_pub_.publish(cv_ptr_color->toImageMsg());
 	A_color=cv_ptr_color->image;
@@ -80,14 +77,13 @@ void ImageConverter::kinect_depth_callback(const sensor_msgs::ImageConstPtr& dep
 	return;
 	}
 	B_depth=cv_ptr_depth->image;
-	//cv::imshow("Depth", B_depth);
 	
 	if(k_roll!=0){
-	ROS_INFO("Time before processing");
+	ROS_INFO("\e[1m  Time before processing \e[0m");
 	double secs_before =ros::Time::now().toSec();
 	computer_vision(data_to_ros);
 	double secs_after=ros::Time::now().toSec();
-	ROS_WARN("Elapsed time %f and the FPS processed are %f",secs_after-secs_before,1/(secs_after-secs_before));
+	ROS_INFO("\e[1m Elapsed time %f and the FPS processed are %f \e[0m",secs_after-secs_before,1/(secs_after-secs_before));
 	//myfile<<"Elapsed time "<<secs_after-secs_before<<" FPS processed "<<1/(secs_after-secs_before)<<"\n"; //UNCOMMENT
 	publisher(data_to_ros);
 	}
@@ -169,22 +165,42 @@ void ImageConverter::publisher(std::vector<std::vector<double> > &data_to_ros){
         }
 	msg.P=transformed_pose;
 		
-	msg.height=message[7];
+	msg.length=message[7];
 	msg.width=message[8];
 		
 	msg.type=message[9];
 		
 		//tfb.sendTransform(msg.T);
-	//cv::waitKey(0); UNCOMMENT!!!!!!!!!!
+	ROS_WARN("Press a key to publish the message to Lenny. (Verification Step)");
+	cv::waitKey(0);
+	ROS_INFO("Message succesfully Published.....");
 	pub.publish(msg);
 }
 	
-std::vector<double> ImageConverter::selector(std::vector<std::vector<double> > data_to_ros){ //hacer mas robusta la seleccion.
-	
+std::vector<double> ImageConverter::selector(std::vector<std::vector<double> > data_to_ros){
+
 	std::vector<double> message(data_to_ros[0].size());
+	int n;
+	for (int j=0;j<data_to_ros.size();j++){
+		ROS_INFO("\e[1m Object ID: %i---Bottle Type %.0f \e[0m \n//T: \e[1mX\e[0m %.3f \e[1mY\e[0m %.3f \e[1mZ\e[0m %.3f | R(quaternions): x %f y %f z %f w %f // Length %.2f Width %.2f \n", j+1, data_to_ros[j][9], data_to_ros[j][0], data_to_ros[j][1], data_to_ros[j][2], data_to_ros[j][3], data_to_ros[j][4], data_to_ros[j][5], data_to_ros[j][6], data_to_ros[j][7], data_to_ros[j][8]);
+	}
+	ROS_WARN("Please Identify the bottles detected. Press any key to continue (Verification Step)");
+	cv::waitKey(0);
+	ROS_WARN("Type the Object ID to write a message");
+	std::cin.clear();
+	std::cin.ignore(INT_MAX,'\n');
+	std::cin>>n;
 	
-	for(int i=0;i<10;i++){
-		message[i]=data_to_ros[0][i];
+	if (!std::isnan(n) && n>0 && n<= data_to_ros.size()){
+		for(int i=0;i<10;i++){
+			message[i]=data_to_ros[n-1][i];
+		}
+		ROS_INFO("Writing message to Lenny using data from the \e[1mObject ID %i\e[0m ..........",n);
+	}else{
+		ROS_ERROR("Wrong number introduced. Writing a message for Object ID 1 as default");
+		for(int i=0;i<10;i++){
+			message[i]=data_to_ros[0][i];
+		}
 	}
 	return message;
 }
@@ -238,10 +254,13 @@ void ImageConverter::computer_vision(std::vector<std::vector<double> > &data_to_
 	vector<vector<double> > green_coordinates;
 	vector<vector<double> > white_coordinates;
 	
+	vector<vector<double> > bottle_coordinates;
+	vector<vector<double> > bottle_centers;
 	
 	cv::namedWindow("Colores Segmentada", CV_WINDOW_NORMAL );
 	cv::namedWindow("Verde Segmentada", CV_WINDOW_NORMAL );
 	cv::namedWindow("Blancos Segmentada", CV_WINDOW_NORMAL );
+	cv::namedWindow("Bottles Detected in Scene", CV_WINDOW_NORMAL );
 	
 	cv::split(hsv,canaleshsv);
 	
@@ -260,38 +279,42 @@ void ImageConverter::computer_vision(std::vector<std::vector<double> > &data_to_
 	if(data_color.size()!=0){
 		colorpoints=s.getpoints(data_color);
 		colorpoints_depth=s.scale(colorpoints,image.cols,image.rows,depth.cols,depth.rows);
-		color_coordinates=s.xyz_coord(s.find_depth(colorpoints_depth,colorpoints,depth,data_color),fx,fy,cx,cy);
-		cv::imshow("Colores Segmentada",c.drawcontors(image,data_color,255,127,80));//110 para no detectar manijas. 90 u 88 detecta tapas
-
+		color_coordinates=s.xyz_coord(s.find_depth(colorpoints_depth,colorpoints,depth),fx,fy,cx,cy);
+		//cv::imshow("Colores Segmentada",c.drawcontors(image,data_color,255,127,80));//110 para no detectar manijas. 90 u 88 detecta tapas
+		cv::imshow("Colores Segmentada",c.drawcontors(image,data_color,255,127,80));
+		c.pusher(s.find_depth(colorpoints_depth,colorpoints,depth),bottle_centers);
+		c.pusher(color_coordinates, bottle_coordinates);
 
 	}
 	if(data_green.size()!=0){
 		greenpoints=s.getpoints(data_green);
 		greenpoints_depth=s.scale(greenpoints,image.cols,image.rows,depth.cols,depth.rows);
-		green_coordinates=s.xyz_coord(s.find_depth(greenpoints_depth,greenpoints,depth,data_green),fx,fy,cx,cy);
-		cv::imshow("Verde Segmentada",c.drawcontors(image2,data_green,0,206,209));//400
+		green_coordinates=s.xyz_coord(s.find_depth(greenpoints_depth,greenpoints,depth),fx,fy,cx,cy);
+		cv::imshow("Verde Segmentada",c.drawcontors(image,data_green,0,206,209));//400
+		c.pusher(s.find_depth(greenpoints_depth,greenpoints,depth),bottle_centers);
+		c.pusher(green_coordinates, bottle_coordinates);
 
 	}
 	if(data_white.size()!=0){
 		whitepoints=s.getpoints(data_white);
 		whitepoints_depth=s.scale(whitepoints,image.cols,image.rows,depth.cols,depth.rows);
-		white_coordinates=s.xyz_coord(s.find_depth(whitepoints_depth,whitepoints,depth,data_white),fx,fy,cx,cy);
-		cv::imshow("Blancos Segmentada",c.drawcontors(image3,data_white,255,218,185));
+		white_coordinates=s.xyz_coord(s.find_depth(whitepoints_depth,whitepoints,depth),fx,fy,cx,cy);
+		cv::imshow("Blancos Segmentada",c.drawcontors(image,data_white,255,218,185));
+		c.pusher(s.find_depth(whitepoints_depth,whitepoints,depth),bottle_centers);
+		c.pusher(white_coordinates,bottle_coordinates);
 		
 	}
 	
-	vector<vector<double> > p; //data_to_ros;
+	vector<vector<double> > points_found; //data_to_ros;
 			
-	p= s.push_data(s.getgeometrydata(color_coordinates,data_color,1,fx,fy),s.getgeometrydata(green_coordinates,data_green,2,fx,fy),s.getgeometrydata(white_coordinates,data_white,3,fx,fy));
+	points_found= s.push_data(s.getgeometrydata(color_coordinates,data_color,1,fx,fy),s.getgeometrydata(green_coordinates,data_green,2,fx,fy),s.getgeometrydata(white_coordinates,data_white,3,fx,fy));
 	
-	data_to_ros=p;
+	data_to_ros=points_found;
 	
-	for (int j=0;j<p.size();j++){
-		//cout<<pepe[j][0];
-		cout<<" X "<<p[j][0]<<" Y "<<p[j][1]<<" Z "<<p[j][2]<<" x "<<p[j][3]<<" y "<<p[j][4]<<" z "<<p[j][5]<<" w "<<p[j][6]<<" Height "<<p[j][7]<<" Width "<<p[j][8]<<" Type "<<p[j][9]<<"\n";
+	//if(!bottle_coordinates.empty())
+	cv::imshow("Bottles Detected in Scene",c.write_id(image,bottle_centers,bottle_coordinates));
 		
-		//myfile<<p[j][0]<<","<<p[j][1]<<","<<p[j][2]<<","<<p[j][3]<<","<<p[j][4]<<","<<p[j][5]<<","<<p[j][6]<<","<<p[j][7]<<","<<p[j][8]<<","<<p[j][9]<<"\n";
-	}
+	//myfile<<p[j][0]<<","<<p[j][1]<<","<<p[j][2]<<","<<p[j][3]<<","<<p[j][4]<<","<<p[j][5]<<","<<p[j][6]<<","<<p[j][7]<<","<<p[j][8]<<","<<p[j][9]<<"\n";
 	//cout<<colorpoints<<depth.size()<<image.size()<<"dfghjklhgfdfghjklkjhgfdfghjkl"<<alpha<<"\n";
 	//cv::imshow("Prueba",prueba);  
 	//cout<<prueba;

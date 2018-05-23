@@ -32,16 +32,18 @@ vector<cv::Point> space::scale(vector<cv::Point> Points,int  originalcols, int o
 	return scaled;
 }
 
-vector<vector<double> > space::find_depth(vector<cv::Point> Points_scaled, vector<cv::Point> Points_real, cv::Mat depth, vector<vector<cv::Point> > &contornos){
+vector<vector<double> > space::find_depth(vector<cv::Point> Points_scaled, vector<cv::Point> Points_real, cv::Mat depth){
 	
-	vector<vector<double> > uvz(Points_real.size(),vector<double>(3)); //,
-	
+	vector<vector<double> > uvz(Points_real.size(),vector<double>(4)); //
 	for (int i =0;i<Points_real.size();i++){
 		if(!isnan(depth.at<float>(Points_scaled[i]))){//|| depth.at<float>(Points_scaled[i])!=0){
 			uvz[i][0]=Points_real[i].x;
 			uvz[i][1]=Points_real[i].y;
 			uvz[i][2]=depth.at<float>(Points_scaled[i]);
+			uvz[i][3]=0;
 		}
+		else
+			uvz[i][3]=1;
 	}
 	return uvz;
 }
@@ -51,9 +53,11 @@ vector<vector<double> > space::xyz_coord(vector<vector<double> > Points_xyz, dou
 	vector<vector<double> > kinect_coord(Points_xyz.size(),vector<double>(3));
 	
 	for (int i=0;i<Points_xyz.size();i++){
-		kinect_coord[i][0]= (Points_xyz[i][2]*((Points_xyz[i][0]-cx)/fx));//dividir en 10 para obtener cm 
-		kinect_coord[i][1]= (Points_xyz[i][2]*((Points_xyz[i][1]-cy)/fy));
-		kinect_coord[i][2]= Points_xyz[i][2];
+		if(Points_xyz[i][3]==0){
+			kinect_coord[i][0]= (Points_xyz[i][2]*((Points_xyz[i][0]-cx)/fx));//dividir en 10 para obtener cm 
+			kinect_coord[i][1]= (Points_xyz[i][2]*((Points_xyz[i][1]-cy)/fy));
+			kinect_coord[i][2]= Points_xyz[i][2];
+		}
 	}
 	return kinect_coord;
 }
@@ -132,7 +136,7 @@ vector<vector<double> > space::push_data(vector<vector<double> > color, vector<v
 	return data_to_ros;
 }		
 		
-void space::pusher(vector<vector<double> > &A, vector<vector<double> > &push_data){
+void space::pusher(vector<vector<double> > & A, vector<vector<double> > &push_data){
 	
 	for(int i =0;i<A.size();i++){
 	if(A[i][0]==-0 && A[i][1]==-0 || A[i][2]==0);

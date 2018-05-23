@@ -275,3 +275,51 @@ cv::Mat polycolor::drawcontors(cv::Mat image,vector<vector<cv::Point> > contorno
 	}
 	return image;
 }
+
+cv::Mat polycolor::write_id(cv::Mat image,vector<vector<double> > centers, vector<vector<double> > coordinates){
+	
+	if(centers.empty())
+		return image;
+	
+	std::string s;
+	std::stringstream ss;
+	int n=0;
+		
+	for(int i=0;i<centers.size();i++){
+		if(centers[i][3]==0){
+		ss<<"ID:"<<n+1<<" (X:"<<coordinates[n][0]<<"Y:"<<coordinates[n][1];
+		s=ss.str();
+		cv::putText(image,s,cv::Point(centers[i][0],centers[i][1]),CV_FONT_HERSHEY_SIMPLEX,0.5,cv::Scalar(255,255,0),0.8);
+		ss.str("");
+		ss<<"Z:"<<coordinates[n][2]<<")";
+		s=ss.str();
+		cv::putText(image,s,cv::Point(centers[i][0],centers[i][1]+15),CV_FONT_HERSHEY_SIMPLEX,0.5,cv::Scalar(255,255,0),0.8);
+		ss.str("");
+		n++;
+		}
+	}
+	return image;
+}
+
+/*vector<vector<cv::Point> > polycolor::push_contours(vector<vector<cv::Point> > color, vector<vector<cv::Point> > green, vector<vector<cv::Point> > white){
+
+	vector<vector<cv::Point> > data_to_ros;
+	
+	if(!color.empty())
+		pusher(color, data_to_ros);
+	
+	if(!green.empty())
+		pusher(green, data_to_ros);
+	
+	if(!white.empty())
+		pusher(white, data_to_ros);
+	
+	return data_to_ros;
+}	*/	
+		
+void polycolor::pusher(vector<vector<double> > A, vector<vector<double> > &push_data){
+	
+	for(int i =0;i<A.size();i++){
+		push_data.push_back(A[i]);	
+	}
+}
