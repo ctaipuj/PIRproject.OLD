@@ -7,6 +7,7 @@
 
 #include<iostream>
 #include<math.h>
+#include<string>
 
 class polycolor{
 
@@ -35,10 +36,16 @@ class polycolor{
 	cv::Mat findwhite(cv::Mat maskwhite,cv::Mat maskvalue);
 
 	std::vector<std::vector<cv::Point> > findcontours(cv::Mat proc,int cmin,int cmax, int max_detection);
-
-	cv::Mat drawcontors(cv::Mat image,std::vector<std::vector<cv::Point> > contornos,int r,int g,int b);
 	
+	cv::Mat drawcontors(cv::Mat image,std::vector<std::vector<cv::Point> > contornos,int r,int g,int b);
+
+	cv::Mat write_id(cv::Mat image,std::vector<std::vector<double> > contornos,std::vector<std::vector<double> > data);
+		
 	void clean_contours(cv::Mat image,std::vector<std::vector<cv::Point> > * contornos);
+	
+	//std::vector<std::vector<cv::Point> > push_contours(std::vector<std::vector<cv::Point> > color, std::vector<std::vector<cv::Point> > green, std::vector<std::vector<cv::Point> > white);
+	
+	void pusher(std::vector<std::vector<double> > A, std::vector<std::vector<double> > &push_data);
 };
 
 #endif
