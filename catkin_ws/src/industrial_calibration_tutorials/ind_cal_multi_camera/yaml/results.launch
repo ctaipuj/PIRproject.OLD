@@ -1,0 +1,6 @@
+<launch>
+# this file might be empty
+# It might contain static transform publishers that were updated through calibration
+# Often, transform interfaces use some other mechanism to update themselves
+
+</launch> 
