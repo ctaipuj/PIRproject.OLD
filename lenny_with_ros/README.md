@@ -14,6 +14,8 @@ This folder contains packages that were modified or created in order to execute 
 
 4. **Robotiq** Gripper's package developed by robotiq.
 
-5. **Lenny Calibration** Package used to calibrate Lenny with aruco markers.
+5. **Openni Camera** Package needed when using the kinect camera.
+
+6. **Openni Tracker** Package used to perform skeleton traking.
 
 *Created by Nicolas May 2018*

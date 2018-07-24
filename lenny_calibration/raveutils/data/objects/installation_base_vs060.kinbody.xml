@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Kinbody name="installation_base_vs060">
+
+  <body name="top_plate" enable="False">
+    <geom type="box">
+      <extents>0.25 0.25 0.01</extents>
+      <diffusecolor>0.518 0.529 0.537</diffusecolor>
+      <translation>0 0 -0.01</translation>
+    </geom>
+  </body>
+
+  <body name="padding">
+    <geom type="box">
+      <extents>0.26 0.26 0.285</extents>
+      <diffusecolor>1 0 0</diffusecolor>
+      <transparency>1</transparency>
+      <translation>0 0 -0.285</translation>
+    </geom>
+    <!-- Padding on top of the base -->
+    <geom type="box">
+      <extents>0.08 0.1 0.005</extents>
+      <diffusecolor>0 1 0</diffusecolor>
+      <transparency>1</transparency>
+      <translation>0.18 0 0.005</translation>
+    </geom>
+    <geom type="box">
+      <extents>0.26 0.08 0.005</extents>
+      <diffusecolor>0 0 1</diffusecolor>
+      <transparency>1</transparency>
+      <translation>0 0.18 0.005</translation>
+    </geom>
+    <geom type="box">
+      <extents>0.26 0.08 0.005</extents>
+      <diffusecolor>1 0 0</diffusecolor>
+      <transparency>1</transparency>
+      <translation>0 -0.18 0.005</translation>
+    </geom>
+  </body>
+
+  <body name="leg1" enable="False">
+    <offsetfrom>top_plate</offsetfrom>
+    <translation>0.215 0.215 -0.305</translation>
+    <geom type="box">
+      <extents>0.02 0.02 0.285</extents>
+      <diffusecolor>0.518 0.529 0.537</diffusecolor>
+    </geom>
+  </body>
+
+  <body name="leg2" enable="False">
+    <offsetfrom>top_plate</offsetfrom>
+    <translation>-0.215 0.215 -0.305</translation>
+    <geom type="box">
+      <extents>0.02 0.02 0.285</extents>
+      <diffusecolor>0.518 0.529 0.537</diffusecolor>
+    </geom>
+  </body>
+
+  <body name="leg3" enable="False">
+    <offsetfrom>top_plate</offsetfrom>
+    <translation>-0.215 -0.215 -0.305</translation>
+    <geom type="box">
+      <extents>0.02 0.02 0.285</extents>
+      <diffusecolor>0.518 0.529 0.537</diffusecolor>
+    </geom>
+  </body>
+
+  <body name="leg4" enable="False">
+    <offsetfrom>top_plate</offsetfrom>
+    <translation>0.215 -0.215 -0.305</translation>
+    <geom type="box">
+      <extents>0.02 0.02 0.285</extents>
+      <diffusecolor>0.518 0.529 0.537</diffusecolor>
+    </geom>
+  </body>
+
+  <!-- adjacent links -->
+  <adjacent>top_plate leg1</adjacent>
+  <adjacent>top_plate leg2</adjacent>
+  <adjacent>top_plate leg3</adjacent>
+  <adjacent>top_plate leg4</adjacent>
+
+  <!-- static joints -->
+  <joint name="joint_padding" type="hinge" enable="false">
+    <body>top_plate</body>
+    <body>padding</body>
+    <limits>0 0</limits>
+  </joint>
+  <joint name="joint_leg1" type="hinge" enable="false">
+    <body>top_plate</body>
+    <body>leg1</body>
+    <limits>0 0</limits>
+  </joint>
+  <joint name="joint_leg2" type="hinge" enable="false">
+    <body>top_plate</body>
+    <body>leg2</body>
+    <limits>0 0</limits>
+  </joint>
+  <joint name="joint_leg3" type="hinge" enable="false">
+    <body>top_plate</body>
+    <body>leg3</body>
+    <limits>0 0</limits>
+  </joint>
+  <joint name="joint_leg4" type="hinge" enable="false">
+    <body>top_plate</body>
+    <body>leg4</body>
+    <limits>0 0</limits>
+  </joint>
+
+</Kinbody>
