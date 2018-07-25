@@ -16,6 +16,6 @@ This folder contains packages that were modified or created in order to execute 
 
 5. **Openni Camera** Package needed when using the kinect camera.
 
-6. **Openni Tracker** Package used to perform skeleton traking.
+6. **Openni Tracker** Package used to perform skeleton tracking.
 
 *Created by Nicolas May 2018*
