@@ -1,4 +1,5 @@
-THIS REPO IS ARCHIVED AND NO LOGNER MAINTAINED. FOR LENNY_ROS FRAMEWORK SEE (https://github.com/ctaipuj/lenny_motoman) (here)
+THIS REPO IS ARCHIVED AND NO LONGER MAINTAINED. FOR LENNY_ROS FRAMEWORK SEE https://github.com/ctaipuj/lenny_motoman
+
 # PIR-project @ CTAI-PUJ
 
 PIR project was conceived in 2016 as a long-term research initiative at CTAI (Centro Tecnológico de Automatización Industrial), focused on conducting research on the technical aspect of the collaborative and flexibility concepts of Co-ROBOTs in the industry. We aim to create a framework where we will develop the software and hardware required for the human-machine interaction in an industrial environment *(collaborative concept)*; and that provides flexibility to the same robot to work in different tasks, by incorporating perception and intelligence to the robot *(flexibility concept)*.
@@ -32,3 +33,4 @@ The main objective of CTAI is to contributing to the scientific and technologica
 The Center boasts highly qualified human and technical resources in the product design and manufacturing of production planning and control, process simulation, computer numerical control (CNC) operations, quality control by computer vision, and computer integrated manufacturing.
 
 *Created by Nicolas May 2018*
+*Modified August 2018*
